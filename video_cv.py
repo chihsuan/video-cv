@@ -13,11 +13,12 @@ def get_video_info(video):
     video_info['fps'] = video.get(cv2.cv.CV_CAP_PROP_FPS)
     return video_info
 
-def loop(video, end_frame, func, counter=24):
-    pos_frame = 0
-    while pos_frame < end_frame:
-        func()
-    pos_frame += counter 
+def loop(video, end_frame, func, transpose=False, gray=True, counter=24):
+    pos = 0
+    while pos < end_frame:
+        img = get_image_by_pos(video, pos, gray, transpose)
+        func(img)
+        pos += counter 
 
 def get_image_by_pos(video, pos, gray, transpose):
     
